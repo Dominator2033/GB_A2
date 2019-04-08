@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <EditText
+        android:id="@+id/editCityText"
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/topHeight"
+        android:ems="4"
+        android:gravity="center"
+        android:hint="@string/city"
+        android:inputType="text"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/send_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/send_btn"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCityText" />
+
+    <Switch
+        android:id="@+id/switch_for_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switch_for_wetness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/switch_for_speed"
+        app:layout_constraintTop_toBottomOf="@id/switch_for_speed" />
+
+    <TextView
+        android:id="@+id/wetness"
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/rob"
+
+        android:text="@string/wetness1"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_for_wetness"
+        app:layout_constraintStart_toEndOf="@+id/switch_for_wetness"
+        app:layout_constraintTop_toTopOf="@+id/switch_for_wetness"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/rob"
+        android:text="@string/speed"
+        app:layout_constraintBottom_toTopOf="@+id/switch_for_wetness"
+        app:layout_constraintStart_toEndOf="@+id/switch_for_speed"
+        app:layout_constraintTop_toTopOf="@+id/switch_for_speed"
+        tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/switch_for_rain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <Switch
+        android:id="@+id/switch_for_sun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/switch_for_rain"
+        app:layout_constraintTop_toBottomOf="@+id/switch_for_rain" />
+
+    <TextView
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/rob"
+        android:text="@string/rain"
+
+        app:layout_constraintBottom_toBottomOf="@id/switch_for_rain"
+        app:layout_constraintStart_toEndOf="@+id/switch_for_rain"
+        app:layout_constraintTop_toTopOf="@id/switch_for_rain"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/rob"
+        android:text="@string/sun"
+
+        app:layout_constraintBottom_toBottomOf="@id/switch_for_sun"
+        app:layout_constraintStart_toEndOf="@+id/switch_for_sun"
+        app:layout_constraintTop_toTopOf="@id/switch_for_sun"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/switch_for_wetness"
+        app:layout_constraintTop_toBottomOf="@id/switch_for_wetness" />
+
+    <TextView
+        style="@style/Mytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rob"
+        android:text="@string/show_temp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toStartOf="@+id/wetness"
+        app:layout_constraintTop_toTopOf="@+id/checkBox" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/elevation"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_add">Добавить</string>
+    <string name="menu_clear">Очистить</string>
+    <string name="menu_info">Информация</string>
+    <string name="item_2">Пункт 2</string>
+    <string name="item_1">Пункт 1</string>
+
+    <string name="degrees">°</string>
+    <string name="degrees_for_day">28°C</string>
+    <string name="degrees_for_night">20°C</string>
+    <string name="speed_wind">15 м/с Скорость ветра</string>
+    <string name="wetness">Влажность - 78%</string>
+    <string name="city">Город...</string>
+    <string name="send_btn">+</string>
+    <string name="wetness1">Влажность</string>
+    <string name="speed">Скорость ветра</string>
+    <string name="show_temp">Показать температуру</string>
+    <string name="sun">Солнце</string>
+    <string name="rain">Дождь</string>
+
+    <string name="attention">Внимание!</string>
+    <string name="fill_field">Заполните поле город!</string>
+
+    <string name="wetness_show">wetness</string>
+    <string name="temp_show">temp</string>
+    <string name="rain_show">rain</string>
+    <string name="sun_show">sun</string>
+    <string name="wind_show">wind</string>
+    <string name="city_show">city</string>
+    <string name="about">About</string>
+    <string name="send">Send</string>
+    <string name="share">Share</string>
+    <string name="communicate">Communicate</string>
+    <string name="tools">Tools</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="gallery">Gallery</string>
+    <string name="rate">Rate</string>
+    <string name="support">Support</string>
+    <string name="gallery_opened">Gallery opened</string>
+    <string name="developers">Developers</string>
+    <string name="contacts">Contacts</string>
+
+    <string name="about_dev">Разработчики</string>
+    <string name="about_dev_info">Разработано студией GeekBrains\nВерсия 1.0\ngeekbrains.ru</string>
+    <string name="version">Версия 1.0</string>
+    <string name="frag_support">Support</string>
+    <string name="frag_contacts">Contacts</string>
+    <string name="frag_rate">Rate</string>
+</resources>
