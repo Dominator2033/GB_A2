@@ -30,19 +30,22 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String str;
-    private Switch aSwitch;
-    private Switch rainSwitch;
-    private Switch sunSwitch;
+    private Switch aSwitch, rainSwitch, sunSwitch;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private Button sendButton;
+    private EditText editTextCity;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        initViews();
         setSupportActionBar(toolbar);
-
         fab();
         drawer(toolbar);
         setSunSwitch();
@@ -50,8 +53,19 @@ public class MainActivity extends AppCompatActivity
         addCity();
     }
 
+    public void initViews() {
+        drawer = findViewById(R.id.drawer_layout);
+        toolbar = findViewById(R.id.toolbar);
+        sendButton = findViewById(R.id.send_btn);
+        editTextCity = findViewById(R.id.editCityText);
+        checkBox = findViewById(R.id.checkBox);
+        aSwitch = findViewById(R.id.switch_for_wetness);
+        sunSwitch = findViewById(R.id.switch_for_sun);
+        rainSwitch = findViewById(R.id.switch_for_rain);
+        aSwitch = findViewById(R.id.switch_for_speed);
+    }
+
     private void drawer(Toolbar toolbar) {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -73,7 +87,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void addCity() {
-        Button sendButton = findViewById(R.id.send_btn);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,9 +96,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setWeatherParam() {
-        EditText editText = findViewById(R.id.editCityText);
-        if (editText != null) {
-            str = editText.getText().toString();
+        if (editTextCity != null) {
+            str = editTextCity.getText().toString();
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
             windSpeed(intent);
@@ -93,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             sunSwitch(intent);
             wetnessSwitch(intent);
             showTemp(intent);
-            checkBtn(editText, intent);
+            checkBtn(editTextCity, intent);
         }
     }
 
@@ -107,7 +119,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showTemp(Intent intent) {
-        CheckBox checkBox = findViewById(R.id.checkBox);
         if (checkBox.isChecked()) {
             intent.putExtra(getResources().getString(R.string.temp_show), "View.VISIBLE");
         } else {
@@ -116,7 +127,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void wetnessSwitch(Intent intent) {
-        aSwitch = findViewById(R.id.switch_for_wetness);
         if (aSwitch.isChecked()) {
             intent.putExtra(getResources().getString(R.string.wetness_show), "View.VISIBLE");
         } else {
@@ -141,7 +151,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setSunSwitch() {
-        sunSwitch = findViewById(R.id.switch_for_sun);
         sunSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -153,7 +162,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setRainSwitch() {
-        rainSwitch = findViewById(R.id.switch_for_rain);
         rainSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -165,7 +173,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void windSpeed(Intent intent) {
-        aSwitch = findViewById(R.id.switch_for_speed);
         if (aSwitch.isChecked()) {
             intent.putExtra(getResources().getString(R.string.wind_show), "View.VISIBLE");
         } else {
@@ -175,7 +182,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -208,9 +214,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void clearCity() {
-        EditText editText = findViewById(R.id.editCityText);
-        if (editText != null) {
-            editText.setText("");
+        if (editTextCity != null) {
+            editTextCity.setText("");
             Toast.makeText(this, "Очистили поле город", Toast.LENGTH_SHORT).show();
         }
     }
