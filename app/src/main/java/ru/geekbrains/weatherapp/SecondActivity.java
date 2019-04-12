@@ -1,5 +1,6 @@
 package ru.geekbrains.weatherapp;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.constraint.Group;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -17,18 +19,18 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class SecondActivity extends AppCompatActivity {
-    //Sensors
-    private Sensor sensorTemp;
-    private Sensor sensorHum;
-    private SensorManager sensorManagerTemp;
-    private SensorManager sensorManagerHum;
-    private TextView textTemp;
-    private TextView textHum;
+    private Sensor sensorTemp, sensorHum;
+    private SensorManager sensorManagerTemp, sensorManagerHum;
+    private TextView textTemp, textCity, textDate, wetness, wind;
+    private Group groupRain, groupSun, groupTemp;
+
+    Button startServiceBtn, stopServiceBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        initViews();
         // передача названия города
         showNameCity();
         // показать или скрыть температуру
@@ -44,9 +46,6 @@ public class SecondActivity extends AppCompatActivity {
         // вывод текущей даты
         showDate();
 
-        textHum = findViewById(R.id.wetness);
-        textTemp = findViewById(R.id.temp);
-
         sensorManagerHum = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManagerTemp = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -55,12 +54,48 @@ public class SecondActivity extends AppCompatActivity {
 
         sensorManagerHum.registerListener(listenerHum, sensorHum, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManagerTemp.registerListener(listenerTemp, sensorTemp, SensorManager.SENSOR_DELAY_NORMAL);
+
+        startService();
+        stopService();
+    }
+
+    private void initViews() {
+        startServiceBtn = findViewById(R.id.start_service);
+        stopServiceBtn = findViewById(R.id.stop_service);
+        textTemp = findViewById(R.id.temp);
+        textCity = findViewById(R.id.city);
+        textDate = findViewById(R.id.date_id);
+        wetness = findViewById(R.id.wetness);
+        wind = findViewById(R.id.wind_speed);
+        groupRain = findViewById(R.id.group_rain);
+        groupSun = findViewById(R.id.group_sun);
+        groupTemp = findViewById(R.id.group);
+    }
+
+    private void startService() {
+        startServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, WeatherService.class);
+                startService(intent);
+            }
+        });
+    }
+
+    private void stopService() {
+        stopServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, WeatherService.class);
+                stopService(intent);
+            }
+        });
     }
 
     private void showHumSensor(SensorEvent event) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Влажность - ").append(Math.round(event.values[0])).append("%");
-        textHum.setText(stringBuilder);
+        wetness.setText(stringBuilder);
     }
 
     SensorEventListener listenerHum = new SensorEventListener() {
@@ -88,7 +123,6 @@ public class SecondActivity extends AppCompatActivity {
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
         }
     };
 
@@ -100,19 +134,16 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void showNameCity() {
-        TextView textView = findViewById(R.id.city);
-        textView.setText(Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.city_show)));
+        textCity.setText(Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.city_show)));
     }
 
     private void showDate() {
         DateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM, HH:mm", Locale.getDefault());
-        TextView textDate = findViewById(R.id.date_id);
         textDate.setText(simpleDateFormat.format(Calendar.getInstance().getTime()));
     }
 
     // Показать влажность
     public void showWetness() {
-        TextView wetness = findViewById(R.id.wetness);
         String wet = Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.wetness_show));
         if (wet != null && wet.equals("View.VISIBLE")) {
             wetness.setVisibility(View.VISIBLE);
@@ -123,7 +154,6 @@ public class SecondActivity extends AppCompatActivity {
 
     // Показать скорость ветра
     public void showSpeedWind() {
-        TextView wind = findViewById(R.id.wind_speed);
         String windSpeed = Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.wind_show));
         if (windSpeed != null && windSpeed.equals("View.VISIBLE")) {
             wind.setVisibility(View.VISIBLE);
@@ -134,34 +164,31 @@ public class SecondActivity extends AppCompatActivity {
 
     // Будет ли дождь?
     public void showRain() {
-        Group group = findViewById(R.id.group_rain);
         String str = Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.rain_show));
         if (str != null && str.equals("View.VISIBLE")) {
-            group.setVisibility(View.VISIBLE);
+            groupRain.setVisibility(View.VISIBLE);
         } else {
-            group.setVisibility(View.INVISIBLE);
+            groupRain.setVisibility(View.INVISIBLE);
         }
     }
 
     // Солнце
     public void showSun() {
-        Group group = findViewById(R.id.group_sun);
         String str = Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.sun_show));
         if (str != null && str.equals("View.VISIBLE")) {
-            group.setVisibility(View.VISIBLE);
+            groupSun.setVisibility(View.VISIBLE);
         } else {
-            group.setVisibility(View.INVISIBLE);
+            groupSun.setVisibility(View.INVISIBLE);
         }
     }
 
     // Показать температуру
     public void showTemp() {
-        Group group = findViewById(R.id.group);
         String s = Objects.requireNonNull(getIntent().getExtras()).getString(getResources().getString(R.string.temp_show));
         if (s != null && s.equals("View.VISIBLE")) {
-            group.setVisibility(View.VISIBLE);
+            groupTemp.setVisibility(View.VISIBLE);
         } else {
-            group.setVisibility(View.INVISIBLE);
+            groupTemp.setVisibility(View.INVISIBLE);
         }
     }
 }
