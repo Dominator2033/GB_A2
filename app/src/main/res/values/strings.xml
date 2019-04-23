@@ -54,4 +54,19 @@
     <string name="frag_support">Support</string>
     <string name="frag_contacts">Contacts</string>
     <string name="frag_rate">Rate</string>
+
+    <string name="weather_sunny">&#xf00d;</string>
+    <string name="weather_clear_night">&#xf02e;</string>
+    <string name="weather_foggy">&#xf014;</string>
+    <string name="weather_cloudy">&#xf013;</string>
+    <string name="weather_rainy">&#xf019;</string>
+    <string name="weather_snowy">&#xf01b;</string>
+    <string name="weather_thunder">&#xf01e;</string>
+    <string name="weather_drizzle">&#xf01c;</string>
+    <string name="place_not_found">Place not found</string>
+    <string name="change_city">Change city</string>
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="json_weather">JSON Weather</string>
+    <string name="retrofit_weather">Retrofit Weather</string>
 </resources>
