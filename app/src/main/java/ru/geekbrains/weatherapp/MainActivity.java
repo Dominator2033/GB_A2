@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     private DrawerLayout drawer;
     private Toolbar toolbar;
-    private Button sendButton;
+    private Button sendButton, jsonActivityBtn;
     private EditText editTextCity;
     private CheckBox checkBox;
 
@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity
         setSunSwitch();
         setRainSwitch();
         addCity();
+
+        jsonActivity();
+        //retrofitActivity();
     }
 
     public void initViews() {
@@ -63,6 +66,18 @@ public class MainActivity extends AppCompatActivity
         sunSwitch = findViewById(R.id.switch_for_sun);
         rainSwitch = findViewById(R.id.switch_for_rain);
         aSwitch = findViewById(R.id.switch_for_speed);
+        jsonActivityBtn = findViewById(R.id.third_activity_btn);
+    }
+
+    private void jsonActivity() {
+        jsonActivityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ThirdActivityJSON.class);
+                intent.putExtra("test", editTextCity.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
 
     private void drawer(Toolbar toolbar) {
